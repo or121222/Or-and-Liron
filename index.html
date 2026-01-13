@@ -2,40 +2,45 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>טיול מילאנו 2026 - רגעי השיא</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>טיול מילאנו 2026</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap');
 
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --text-color: #333;
+            --glass-bg: rgba(255, 255, 255, 0.65); /* יותר אטום לקריאות בטלפון */
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            background: linear-gradient(135deg, #8EC5FC 0%, #E0C3FC 100%);
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
             height: 100vh;
+            height: 100dvh; /* התאמה מושלמת למובייל מודרני */
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
 
-        /* רקע דינמי זז */
+        /* רקע דינמי עדין */
         body::before {
             content: '';
             position: absolute;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
-            animation: moveBackground 15s infinite linear;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: moveBackground 20s infinite linear;
             z-index: -1;
+            pointer-events: none;
         }
 
         @keyframes moveBackground {
@@ -45,172 +50,197 @@
 
         .container {
             width: 90%;
-            max-width: 500px;
-            min-height: 60vh;
+            max-width: 400px;
+            height: 85%; /* משאיר קצת שוליים למעלה ולמטה כמו כרטיסייה */
+            max-height: 800px;
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden; /* מונע גלילה של הכרטיס כולו */
+        }
+
+        /* מסך נחיתה */
+        #landing-screen {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            height: 100%;
             text-align: center;
-            position: relative;
-            transition: all 0.5s ease;
         }
 
-        /* מסך נחיתה */
         #landing-screen h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
             line-height: 1.2;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+            background: -webkit-linear-gradient(#4a4a4a, #2a2a2a);
+            -webkit-background-clip: text;
         }
 
         #landing-screen h2 {
-            font-size: 1.5rem;
-            color: #fff;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 3rem;
+            font-weight: 500;
         }
 
+        /* כפתורים מעוצבים */
         .btn {
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
+            width: 100%;
+            padding: 18px;
+            border-radius: 25px;
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             color: #fff;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+            transition: transform 0.1s;
+            outline: none;
+            user-select: none; /* תחושת אפליקציה */
         }
 
         .btn:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
         }
 
         /* מסך התוכן */
         #content-screen {
             display: none;
-            width: 100%;
-            height: 100%;
             flex-direction: column;
+            height: 100%;
             justify-content: space-between;
         }
 
-        .scene-container {
+        .scene-scroll-area {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* ממרכז תוכן קצר */
             align-items: center;
+            overflow-y: auto; /* מאפשר גלילה רק לתוכן אם הוא ארוך */
+            padding: 10px 0;
             width: 100%;
+        }
+
+        /* הסתרת פס גלילה אבל השארת יכולת גלילה */
+        .scene-scroll-area::-webkit-scrollbar {
+            width: 0px; 
+            background: transparent;
         }
 
         .character-avatar {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-            animation: bounce 2s infinite ease-in-out;
+            font-size: 3.5rem; /* הוקטן למובייל */
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+            animation: float 3s infinite ease-in-out;
         }
 
-        @keyframes bounce {
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         .bubble {
-            background: rgba(255, 255, 255, 0.85);
+            background: #fff;
             color: #333;
-            padding: 20px;
-            border-radius: 20px;
-            border-bottom-right-radius: 2px;
-            font-size: 1.3rem;
-            font-weight: 500;
+            padding: 18px 22px;
+            border-radius: 22px;
+            border-top-right-radius: 4px;
+            font-size: 1.1rem;
+            line-height: 1.5;
             position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             max-width: 100%;
-            opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            animation: popIn 0.5s forwards;
+            text-align: center;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .bubble.left {
-            border-bottom-right-radius: 20px;
-            border-bottom-left-radius: 2px;
-            background: #fff0f5; /* צבע שונה קצת לדיאלוג שני */
-            align-self: flex-end; /* יישור לשמאל ב-RTL */
+        /* בועה בדיאלוג */
+        .dialogue-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 10px;
         }
 
-        .bubble::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: -10px;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.85);
-            border-bottom-left-radius: 15px;
-            z-index: -1;
+        .chat-row {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
         }
 
-        .bubble.left::after {
-            right: auto;
-            left: -10px;
-            background: #fff0f5;
-            transform: scaleX(-1);
+        .chat-row.right {
+            align-self: flex-start;
+            align-items: flex-start;
+        }
+
+        .chat-row.left {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .speaker-label {
+            font-size: 0.75rem;
+            color: #777;
+            margin-bottom: 4px;
+            padding: 0 4px;
+        }
+
+        .chat-bubble {
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 1rem;
+            line-height: 1.4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .chat-row.right .chat-bubble {
+            background: #fff;
+            border-top-right-radius: 4px;
+        }
+
+        .chat-row.left .chat-bubble {
+            background: #e1ffc7; /* צבע כמו בוואטסאפ לדיאלוג שני */
+            border-top-left-radius: 4px;
+            text-align: left; /* תמיכה באנגלית */
+            direction: ltr;
+        }
+
+        .context-pill {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.4);
+            align-self: center;
         }
 
         @keyframes popIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        .context-title {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #fff;
-            background: rgba(0,0,0,0.1);
-            padding: 5px 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dialogue-box {
-            display: flex;
-            flex-direction: column;
+        /* אזור הכפתור למטה */
+        .footer-action {
+            padding-top: 15px;
+            background: transparent;
             width: 100%;
-            gap: 15px;
-        }
-
-        .speaker-name {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 2px;
-            font-weight: bold;
-        }
-        
-        /* התאמה למסכים קטנים */
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            .container { width: 85%; padding: 1.5rem; }
         }
 
     </style>
@@ -219,23 +249,23 @@
 
     <div class="container">
         <div id="landing-screen">
-            <h1>טיול מילאנו 2026<br>קטעים מצחיקים</h1>
-            <h2>אור ולירון</h2>
-            <button class="btn" onclick="startGame()">התחלנו? ✈️</button>
+            <div style="font-size: 4rem; margin-bottom: 10px;">✈️🇮🇹</div>
+            <h1>טיול מילאנו<br>2026</h1>
+            <h2>קטעים של אור ולירון</h2>
+            <div style="flex-grow: 1;"></div> <button class="btn" onclick="startGame()">התחלנו? 🤣</button>
         </div>
 
         <div id="content-screen">
-            <div id="scene-area" class="scene-container">
+            <div id="scene-area" class="scene-scroll-area">
                 </div>
             
-            <div style="margin-top: 30px;">
-                <button class="btn" id="next-btn" onclick="nextScene()">המשך 🤣</button>
+            <div class="footer-action">
+                <button class="btn" id="next-btn" onclick="nextScene()">המשך</button>
             </div>
         </div>
     </div>
 
     <script>
-        // המידע - כאן נמצאים כל הציטוטים והדיאלוגים
         const scenes = [
             {
                 type: "single",
@@ -246,10 +276,10 @@
             },
             {
                 type: "single",
-                avatar: "😖",
+                avatar: "🤢",
                 speaker: "לירון",
-                context: "טועמת משהו",
-                text: "It tastes very very ugly 🤢"
+                context: "טעימות",
+                text: "It tastes very very ugly"
             },
             {
                 type: "single",
@@ -302,19 +332,31 @@
             const sceneArea = document.getElementById('scene-area');
             const scene = scenes[currentSceneIndex];
             
-            // ניקוי תוכן קודם
+            // איפוס תוכן
             sceneArea.innerHTML = '';
+            sceneArea.style.opacity = 0; // פייד אין קצר
+            
+            setTimeout(() => {
+                sceneArea.style.transition = 'opacity 0.3s ease';
+                sceneArea.style.opacity = 1;
+            }, 50);
 
-            // כותרת הקשר (למשל: במטוס)
+            // יצירת התוכן
+            const contentWrapper = document.createElement('div');
+            contentWrapper.style.display = 'flex';
+            contentWrapper.style.flexDirection = 'column';
+            contentWrapper.style.alignItems = 'center';
+            contentWrapper.style.width = '100%';
+
+            // כותרת הקשר
             if (scene.context) {
-                const contextDiv = document.createElement('div');
-                contextDiv.className = 'context-title';
-                contextDiv.innerText = scene.context;
-                sceneArea.appendChild(contextDiv);
+                const contextPill = document.createElement('div');
+                contextPill.className = 'context-pill';
+                contextPill.innerText = scene.context;
+                contentWrapper.appendChild(contextPill);
             }
 
             if (scene.type === 'single') {
-                // הצגת ציטוט יחיד
                 const avatarDiv = document.createElement('div');
                 avatarDiv.className = 'character-avatar';
                 avatarDiv.innerText = scene.avatar;
@@ -323,59 +365,56 @@
                 bubbleDiv.className = 'bubble';
                 bubbleDiv.innerHTML = scene.text;
 
-                sceneArea.appendChild(avatarDiv);
-                sceneArea.appendChild(bubbleDiv);
+                contentWrapper.appendChild(avatarDiv);
+                contentWrapper.appendChild(bubbleDiv);
 
             } else if (scene.type === 'dialogue') {
-                // הצגת דיאלוג
                 const dialogueContainer = document.createElement('div');
                 dialogueContainer.className = 'dialogue-box';
 
                 scene.lines.forEach((line, index) => {
-                    const lineContainer = document.createElement('div');
-                    lineContainer.style.display = 'flex';
-                    lineContainer.style.flexDirection = 'column';
-                    lineContainer.style.alignItems = line.side === 'right' ? 'flex-start' : 'flex-end';
+                    const row = document.createElement('div');
+                    row.className = `chat-row ${line.side}`;
                     
-                    // עיכוב קטן בהופעת כל שורה בדיאלוג
-                    lineContainer.style.animation = `popIn 0.5s ease forwards ${index * 0.5}s`;
-                    lineContainer.style.opacity = '0'; // התחלה מוסתרת
+                    // עיכוב בהופעת הודעות
+                    row.style.opacity = '0';
+                    row.style.animation = `popIn 0.4s forwards ${index * 0.6}s`;
 
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = 'speaker-name';
-                    nameSpan.innerText = line.speaker + " " + line.avatar;
+                    const label = document.createElement('span');
+                    label.className = 'speaker-label';
+                    label.innerText = line.speaker;
 
                     const bubble = document.createElement('div');
-                    bubble.className = line.side === 'right' ? 'bubble' : 'bubble left';
+                    bubble.className = 'chat-bubble';
                     bubble.innerText = line.text;
-                    // ביטול האנימציה של הבועה עצמה כדי שהקונטיינר ישלוט בזמן
-                    bubble.style.animation = 'none'; 
-                    bubble.style.opacity = '1';
-                    bubble.style.transform = 'none';
 
-                    lineContainer.appendChild(nameSpan);
-                    lineContainer.appendChild(bubble);
-                    dialogueContainer.appendChild(lineContainer);
+                    row.appendChild(label);
+                    row.appendChild(bubble);
+                    dialogueContainer.appendChild(row);
                 });
 
-                sceneArea.appendChild(dialogueContainer);
+                contentWrapper.appendChild(dialogueContainer);
             }
 
-            // שינוי טקסט הכפתור בסוף
+            sceneArea.appendChild(contentWrapper);
+
+            // עדכון כפתור
             const btn = document.getElementById('next-btn');
             if (currentSceneIndex === scenes.length - 1) {
                 btn.innerText = "התחלה מחדש 🔄";
+                btn.style.background = "linear-gradient(45deg, #a18cd1 0%, #fbc2eb 100%)";
             } else {
-                btn.innerText = "המשך 🤣";
+                btn.innerText = "הבא בתור 😂";
+                btn.style.background = "linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)";
             }
         }
 
         function nextScene() {
             currentSceneIndex++;
             if (currentSceneIndex >= scenes.length) {
-                currentSceneIndex = 0; // חזרה להתחלה
+                currentSceneIndex = 0;
                 document.getElementById('content-screen').style.display = 'none';
-                document.getElementById('landing-screen').style.display = 'block';
+                document.getElementById('landing-screen').style.display = 'flex'; // חזרה ל-flex
                 return;
             }
             renderScene();
